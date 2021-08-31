@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Fancy Intro Video Maker</string>
+
+    <!--    FACEBOOK ADS ID-->
+<!--    <string name="facebookBannerAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>-->
+<!--    <string name="facebookInterstialAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>-->
+
+    <string name="facebookBannerAd"/>
+    <string name="facebookInterstialAd"/>
+
+</resources>
