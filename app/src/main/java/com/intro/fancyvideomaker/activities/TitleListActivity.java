@@ -8,11 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.intro.fancyvideomaker.R;
@@ -20,6 +15,10 @@ import com.intro.fancyvideomaker.adapters.TitleListAdapter;
 import com.intro.fancyvideomaker.utils.listdecorators.Helper;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TitleListActivity extends AppCompatActivity implements TitleListAdapter.OnAnimationClickListener {
 
@@ -56,7 +55,7 @@ public class TitleListActivity extends AppCompatActivity implements TitleListAda
             }
         });
 
-        loadBannerAd();
+//        loadBannerAd();
         initView();
     }
 
@@ -80,7 +79,7 @@ public class TitleListActivity extends AppCompatActivity implements TitleListAda
     }
 
     private void loadBannerAd() {
-        adView = new AdView(this, getResources().getString(R.string.facebookBannerAd), AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, getResources().getString(R.string.facebook_native_ad), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();

@@ -6,11 +6,11 @@ import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.intro.fancyvideomaker.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class VideoPlayerActivity extends AppCompatActivity {
 
@@ -38,11 +38,11 @@ public class VideoPlayerActivity extends AppCompatActivity {
         mediaController.setAnchorView(videoView);
         videoView.start();
 
-        loadBannerAd();
+//        loadBannerAd();
     }
 
     private void loadBannerAd() {
-        adView = new AdView(this, getResources().getString(R.string.facebookBannerAd), AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, getResources().getString(R.string.facebook_native_ad), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();

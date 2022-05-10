@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import com.intro.fancyvideomaker.R;
 import com.intro.fancyvideomaker.adapters.MyCreationAdapter;
 
 import java.io.File;
-import java.io.FilenameFilter;
 
 public class MyCreationActivity extends AppCompatActivity {
 

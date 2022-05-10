@@ -16,21 +16,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieProperty;
@@ -51,6 +40,15 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class VideoMaker_Activity extends AppCompatActivity {
@@ -104,7 +102,7 @@ public class VideoMaker_Activity extends AppCompatActivity {
         }
 
         initLoadingDialog();
-        loadInterAd();
+//        loadInterAd();
         initView();
 
         tileAnimationView.setAnimation(tileAnimationPath);
@@ -112,7 +110,7 @@ public class VideoMaker_Activity extends AppCompatActivity {
     }
 
     private void loadInterAd() {
-        interstitialAd = new InterstitialAd(this, getResources().getString(R.string.facebookInterstialAd));
+        interstitialAd = new InterstitialAd(this, getResources().getString(R.string.facebook_native_ad));
 
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
