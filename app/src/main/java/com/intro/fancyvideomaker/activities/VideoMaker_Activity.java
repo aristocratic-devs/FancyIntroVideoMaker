@@ -87,6 +87,8 @@ public class VideoMaker_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_video_maker);
         context = this;
 
+
+
         tileAnimationView = findViewById(R.id.tileAnimationView);
         backgroundAnimationView = findViewById(R.id.backgroudnAnimation);
         backgroundImageView = findViewById(R.id.backgroundImageView);
@@ -101,68 +103,16 @@ public class VideoMaker_Activity extends AppCompatActivity {
             getWindow().setNavigationBarColor(getColor(R.color.bg4));
         }
 
+        if (SplashActivity.interstitialAd != null && SplashActivity.interstitialAd.isAdLoaded()) {
+            SplashActivity.interstitialAd.show();
+        }
+
         initLoadingDialog();
 //        loadInterAd();
         initView();
 
         tileAnimationView.setAnimation(tileAnimationPath);
         backgroundAnimationView.setAnimation(backgroundAnimationPath);
-    }
-
-    private void loadInterAd() {
-        interstitialAd = new InterstitialAd(this, getResources().getString(R.string.facebook_native_ad));
-
-        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
-                // Interstitial ad displayed callback
-                Log.e(TAG, "Interstitial ad displayed.");
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                // Interstitial dismissed callback
-                Log.e(TAG, "Interstitial ad dismissed.");
-
-                Intent intent = new Intent(context, VideoPlayerActivity.class);
-                intent.putExtra("path", filePath);
-                intent.putExtra("fromVideoMaker", true);
-                startActivity(intent);
-                finishAffinity();
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                // Ad error callback
-                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
-                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
-                // Show the ad
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                // Ad clicked callback
-                Log.d(TAG, "Interstitial ad clicked!");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
-                Log.d(TAG, "Interstitial ad impression logged!");
-            }
-        };
-
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
     }
 
     private void initLoadingDialog() {

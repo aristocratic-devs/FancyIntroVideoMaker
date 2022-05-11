@@ -1,17 +1,23 @@
 package com.intro.fancyvideomaker.activities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AdOptionsView;
@@ -20,12 +26,15 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdLayout;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeBannerAd;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.intro.fancyvideomaker.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
     Context context;
     private final String TAG = MainActivity.class.getSimpleName();
 
-    private LinearLayout  adView;
-    private NativeBannerAd nativeBannerAd;
+//    private LinearLayout adView;
+//    private NativeBannerAd nativeBannerAd;
+
+    BottomSheetDialog bottomSheetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +56,36 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setNavigationBarColor(getColor(R.color.bg4));
         }
-        loadNativeAd();
+
+        if (SplashActivity.interstitialAd != null && SplashActivity.interstitialAd.isAdLoaded()) {
+            SplashActivity.interstitialAd.show();
+        }
+
+        NativeAdLayout nativeAdLayout = findViewById(R.id.native_ad_container);
+
+        loadNativeAd(nativeAdLayout);
+
+        //        Bottom sheet
+        bottomSheetDialog = new BottomSheetDialog(context);
+        bottomSheetDialog.setContentView(R.layout.exit_layout);
+        AppCompatButton btnExit = bottomSheetDialog.findViewById(R.id.btnExit);
+//        NativeAdLayout exitBanner = bottomSheetDialog.findViewById(R.id.adsviewBannerExit);
+
+//        if (exitBanner != null) {
+//            loadNativeAd(exitBanner);
+//        }
+
+        btnExit.setOnClickListener(v -> finishAffinity());
     }
 
 
-    private void loadNativeAd() {
+    private void loadNativeAd(NativeAdLayout nativeAdLayout) {
         // Instantiate a NativeAd object.
         // NOTE: the placement ID will eventually identify this as your App, you can ignore it for
         // now, while you are testing and replace it later when you have signed up.
         // While you are using this temporary code you will only get test ads and if you release
         // your code like this to the Google Play your users will not receive ads (you will get a no fill error).
         final NativeAd nativeAd = new NativeAd(this, getString(R.string.facebook_native_ad));
-
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onMediaDownloaded(Ad ad) {
@@ -77,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 // Inflate Native Ad into Container
-                inflateAd(nativeAd);
+                inflateAd(nativeAd, nativeAdLayout);
             }
 
             @Override
@@ -100,12 +129,11 @@ public class MainActivity extends AppCompatActivity {
                         .build());
     }
 
-    private void inflateAd(NativeAd nativeAd) {
+    private void inflateAd(NativeAd nativeAd, NativeAdLayout nativeAdLayout) {
 
         nativeAd.unregisterView();
 
         // Add the Ad view into the ad container.
-        NativeAdLayout nativeAdLayout = findViewById(R.id.native_ad_container);
         LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
         // Inflate the Ad view.  The layout referenced should be the one you created in the last step.
         ConstraintLayout adView = (ConstraintLayout) inflater.inflate(R.layout.facebook_ad_container_200,
@@ -176,11 +204,55 @@ public class MainActivity extends AppCompatActivity {
         intent1.setType("text/plain");
         startActivity(intent1);
     }
-    private NativeAdLayout nativeAdLayout;
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed() {
+        final int min = 1;
+        final int max = 4;
+
+        final int random = new Random().nextInt((max - min) + 1) + min;
+
+        if (random == 2) {
+            showRateUsDialog();
+            return;
+        }
+        bottomSheetDialog.show();
+    }
+
+    private void showRateUsDialog() {
+        Rect displayRectangle = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(displayRectangle);
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(R.layout.rate_dia);
+
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setLayout((int) (displayRectangle.width() * 0.8), WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        ImageView imageView = dialog.findViewById(R.id.iv_rate_gif);
+
+        Glide.with(this).load(R.drawable.rate_gif_new).into(imageView);
+
+        TextView tv_exit = dialog.findViewById(R.id.tv_exit);
+        TextView tv_rate = dialog.findViewById(R.id.tv_rate_us);
+
+        tv_rate.setOnClickListener(v -> {
+            dialog.dismiss();
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        });
+        tv_exit.setOnClickListener(v -> {
+            dialog.dismiss();
+            finishAffinity();
+        });
+    }
+
 }

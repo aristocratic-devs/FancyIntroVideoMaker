@@ -37,6 +37,10 @@ public class BackgroundListActivity extends AppCompatActivity implements TitleLi
         setContentView(R.layout.activity_title_list);
         context = this;
 
+        if (SplashActivity.interstitialAd != null && SplashActivity.interstitialAd.isAdLoaded()) {
+            SplashActivity.interstitialAd.show();
+        }
+
         fromVideoMaker = getIntent().getBooleanExtra("fromVideoMaker", false);
 
         bgRecyclerView = findViewById(R.id.titleRecyclerView);
@@ -52,15 +56,15 @@ public class BackgroundListActivity extends AppCompatActivity implements TitleLi
             ivoption.setVisibility(View.GONE);
         }
 
-//        loadBannerAd();
+        loadBannerAd();
         init();
     }
 
     private void loadBannerAd() {
-        adView = new AdView(this, getResources().getString(R.string.facebook_native_ad), AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, getResources().getString(R.string.facebook_banner_ad), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = findViewById(R.id.banner_container);
-        adContainer.addView(adView);
         adView.loadAd();
+        adContainer.addView(adView);
     }
 
     private void init() {

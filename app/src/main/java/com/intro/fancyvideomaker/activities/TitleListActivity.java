@@ -36,6 +36,10 @@ public class TitleListActivity extends AppCompatActivity implements TitleListAda
         setContentView(R.layout.activity_title_list);
         context = this;
 
+        if (SplashActivity.interstitialAd != null && SplashActivity.interstitialAd.isAdLoaded()) {
+            SplashActivity.interstitialAd.show();
+        }
+
         titleRecyclerView = findViewById(R.id.titleRecyclerView);
 
         ImageView ivback = findViewById(R.id.ivback);
@@ -55,7 +59,7 @@ public class TitleListActivity extends AppCompatActivity implements TitleListAda
             }
         });
 
-//        loadBannerAd();
+        loadBannerAd();
         initView();
     }
 
@@ -79,7 +83,7 @@ public class TitleListActivity extends AppCompatActivity implements TitleListAda
     }
 
     private void loadBannerAd() {
-        adView = new AdView(this, getResources().getString(R.string.facebook_native_ad), AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, getResources().getString(R.string.facebook_banner_ad), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();

@@ -32,17 +32,16 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
         videoView.setVideoPath(path);
 
-
         MediaController mediaController = new MediaController(this);
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
         videoView.start();
 
-//        loadBannerAd();
+        loadBannerAd();
     }
 
     private void loadBannerAd() {
-        adView = new AdView(this, getResources().getString(R.string.facebook_native_ad), AdSize.BANNER_HEIGHT_50);
+        adView = new AdView(this, getResources().getString(R.string.facebook_banner_ad), AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();

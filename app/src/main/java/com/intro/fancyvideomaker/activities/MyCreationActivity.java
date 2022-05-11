@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
 import com.intro.fancyvideomaker.R;
 import com.intro.fancyvideomaker.adapters.MyCreationAdapter;
 
@@ -28,6 +31,8 @@ public class MyCreationActivity extends AppCompatActivity {
 
     boolean fromVideoPlayer = false;
 
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,10 @@ public class MyCreationActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getWindow().setNavigationBarColor(getColor(R.color.bg4));
+        }
+
+        if (SplashActivity.interstitialAd != null && SplashActivity.interstitialAd.isAdLoaded()) {
+            SplashActivity.interstitialAd.show();
         }
 
         myCreationRecycler = findViewById(R.id.myCreationRecycler);
@@ -47,6 +56,7 @@ public class MyCreationActivity extends AppCompatActivity {
         ivoption.setVisibility(View.GONE);
 
         getVideos();
+        loadBannerAd();
 
         fromVideoPlayer = getIntent().getBooleanExtra("fromVideoMaker", false);
 
@@ -92,5 +102,12 @@ public class MyCreationActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private void loadBannerAd() {
+        adView = new AdView(this, getResources().getString(R.string.facebook_banner_ad), AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = findViewById(R.id.banner_container);
+        adView.loadAd();
+        adContainer.addView(adView);
     }
 }

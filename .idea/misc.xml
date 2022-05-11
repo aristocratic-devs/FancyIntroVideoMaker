@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/activity_background_list.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/activity_main.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/activity_title_list.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/activity_video_maker.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/activity_video_player.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/exit_layout.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/facebook_ad_container_200.xml" value="0.2421875" />
+        <entry key="..\:/Users/Pratik/Downloads/Android/Work/Aristocratics/Apps/FancyIntroVideoMaker/app/src/main/res/layout/rate_dia.xml" value="0.2421875" />
         <entry key="..\:/Users/home/AristocraticDevs/FancyIntroVideoMaker/app/src/main/res/drawable/round_btn.xml" value="0.23425925925925925" />
         <entry key="..\:/Users/home/AristocraticDevs/FancyIntroVideoMaker/app/src/main/res/layout/activity_background_list.xml" value="0.24270833333333333" />
         <entry key="..\:/Users/home/AristocraticDevs/FancyIntroVideoMaker/app/src/main/res/layout/activity_main.xml" value="0.152" />
@@ -21,7 +29,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
